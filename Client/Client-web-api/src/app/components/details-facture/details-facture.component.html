@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="form-group col-md-2">
-        <label for="txtNoPiece" class="pull-left"> N° Piece</label>
+        <label for="txtNoPiece" class="pull-left" [appHighlight]="'yellow'"> N° Piece</label>
       </div>
       <div class="form-group col-md-3">
         <input type="text" class="form-control" ID="txtNoPiece" [(ngModel)]="facture.NoPiece" required />
