@@ -1,0 +1,36 @@
+<div align="right">
+  <button mat-raised-button color="primary" (click)="TraitementFacture({})">
+    <mat-icon>description</mat-icon>
+    Ajouter
+  </button>
+</div>
+
+<hr>
+<div class="row table-responsive text-nowrap">
+  <!--Table-->
+  <table class="table table-condensed">
+    <thead>
+      <th>N° Facture</th>
+      <th>Client</th>
+      <th>Date Facture</th>
+      <th>Total TTC</th>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let facture of factures">
+        <th scope="row">{{facture.NoPiece}}</th>
+        <td>{{facture.Client}}</td>
+        <td>{{facture.DateFacture | date : "dd/MM/yyyy"}}</td>
+        <td align="right">{{facture.MontantTTC| number : '1.2'}}</td>
+        <td>
+          <div align="right">
+            <i (click)="TraitementFacture(facture)" class="material-icons" style="cursor:pointer" title="Wral">edit</i>
+
+            <i class="material-icons" (click)="remove(facture)" style="cursor:pointer" title="Fakroun">delete</i>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

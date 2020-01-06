@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestcomModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CLIENT">
+    <Key>
+      <PropertyRef Name="ID_CLIENT" />
+    </Key>
+    <Property Name="ID_CLIENT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOM" Type="varchar" MaxLength="500" />
+    <Property Name="PRENOM" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="DOCENTETE">
+    <Key>
+      <PropertyRef Name="ID_PIECE" />
+    </Key>
+    <Property Name="ID_PIECE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DO_PIECE" Type="varchar" MaxLength="50" />
+    <Property Name="DO_TYPE" Type="int" />
+    <Property Name="ID_CLIENT" Type="int" />
+    <Property Name="DO_DATE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DOCLIGNE">
+    <Key>
+      <PropertyRef Name="ID_LIGNE" />
+    </Key>
+    <Property Name="ID_LIGNE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_PIECE" Type="int" />
+    <Property Name="ID_PRODUIT" Type="int" />
+    <Property Name="PRIX" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="DESIGNATION" Type="varchar" MaxLength="500" />
+    <Property Name="TVA" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="QTE" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PRODUIT">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESIGNATION" Type="varchar" MaxLength="500" />
+    <Property Name="PRIX" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="TVA" Type="numeric" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_DOCENTETE_CLIENT">
+    <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+    <End Role="DOCENTETE" Type="Self.DOCENTETE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENT">
+        <PropertyRef Name="ID_CLIENT" />
+      </Principal>
+      <Dependent Role="DOCENTETE">
+        <PropertyRef Name="ID_CLIENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCLIGNE_DOCENTETE">
+    <End Role="DOCENTETE" Type="Self.DOCENTETE" Multiplicity="0..1" />
+    <End Role="DOCLIGNE" Type="Self.DOCLIGNE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOCENTETE">
+        <PropertyRef Name="ID_PIECE" />
+      </Principal>
+      <Dependent Role="DOCLIGNE">
+        <PropertyRef Name="ID_PIECE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCLIGNE_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="0..1" />
+    <End Role="DOCLIGNE" Type="Self.DOCLIGNE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="DOCLIGNE">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestcomModelStoreContainer">
+    <EntitySet Name="CLIENT" EntityType="Self.CLIENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DOCENTETE" EntityType="Self.DOCENTETE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DOCLIGNE" EntityType="Self.DOCLIGNE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_DOCENTETE_CLIENT" Association="Self.FK_DOCENTETE_CLIENT">
+      <End Role="CLIENT" EntitySet="CLIENT" />
+      <End Role="DOCENTETE" EntitySet="DOCENTETE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCLIGNE_DOCENTETE" Association="Self.FK_DOCLIGNE_DOCENTETE">
+      <End Role="DOCENTETE" EntitySet="DOCENTETE" />
+      <End Role="DOCLIGNE" EntitySet="DOCLIGNE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCLIGNE_PRODUIT" Association="Self.FK_DOCLIGNE_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="DOCLIGNE" EntitySet="DOCLIGNE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

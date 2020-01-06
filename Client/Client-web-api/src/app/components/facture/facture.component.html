@@ -1,0 +1,39 @@
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtNoPiece" class="pull-left"> N° Piece</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="text" class="form-control" ID="txtNoPiece" [(ngModel)]="facture.NoPiece" required/>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtClients" class="pull-left">Client</label>
+  </div>
+  <div class="form-group col-md-8">
+
+      <select class="form-control" id="txtClients" size="1" [(ngModel)]="facture.IdClient" >
+          <option *ngFor="let client of listClients" [value]="client.IdClient">{{client.Client}}</option>
+      </select>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtDateFacture" class="pull-left">Date facture</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="date" class="form-control" ID="txtDateFacture" [ngModel]="facture.DateFacture|date:'yyyy-MM-dd'" (ngModelChange)="facture.DateFacture = $event" required/>
+  </div>
+</div>
+
+<div cla="row">
+    <div class="form-group col-md-4">
+     
+    </div>
+    <div class="form-group col-md-8">
+        <button (click)="setFacture(facture)" type="submit" class="btn btn-success mb-2 pull-left">Ajouter</button>
+    </div>
+  </div>
+

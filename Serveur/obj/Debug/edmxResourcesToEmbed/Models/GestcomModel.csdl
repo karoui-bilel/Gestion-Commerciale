@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestcomModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CLIENT">
+    <Key>
+      <PropertyRef Name="ID_CLIENT" />
+    </Key>
+    <Property Name="ID_CLIENT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOM" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PRENOM" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DOCENTETE" Relationship="Self.FK_DOCENTETE_CLIENT" FromRole="CLIENT" ToRole="DOCENTETE" />
+  </EntityType>
+  <EntityType Name="DOCENTETE">
+    <Key>
+      <PropertyRef Name="ID_PIECE" />
+    </Key>
+    <Property Name="ID_PIECE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DO_PIECE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DO_TYPE" Type="Int32" />
+    <Property Name="ID_CLIENT" Type="Int32" />
+    <NavigationProperty Name="CLIENT" Relationship="Self.FK_DOCENTETE_CLIENT" FromRole="DOCENTETE" ToRole="CLIENT" />
+    <NavigationProperty Name="DOCLIGNE" Relationship="Self.FK_DOCLIGNE_DOCENTETE" FromRole="DOCENTETE" ToRole="DOCLIGNE" />
+    <Property Name="DO_DATE" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="DOCLIGNE">
+    <Key>
+      <PropertyRef Name="ID_LIGNE" />
+    </Key>
+    <Property Name="ID_LIGNE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_PIECE" Type="Int32" />
+    <Property Name="ID_PRODUIT" Type="Int32" />
+    <Property Name="PRIX" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DESIGNATION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="TVA" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="QTE" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="DOCENTETE" Relationship="Self.FK_DOCLIGNE_DOCENTETE" FromRole="DOCLIGNE" ToRole="DOCENTETE" />
+    <NavigationProperty Name="PRODUIT" Relationship="Self.FK_DOCLIGNE_PRODUIT" FromRole="DOCLIGNE" ToRole="PRODUIT" />
+  </EntityType>
+  <EntityType Name="PRODUIT">
+    <Key>
+      <PropertyRef Name="ID_PRODUIT" />
+    </Key>
+    <Property Name="ID_PRODUIT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESIGNATION" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="PRIX" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TVA" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="DOCLIGNE" Relationship="Self.FK_DOCLIGNE_PRODUIT" FromRole="PRODUIT" ToRole="DOCLIGNE" />
+  </EntityType>
+  <Association Name="FK_DOCENTETE_CLIENT">
+    <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="0..1" />
+    <End Role="DOCENTETE" Type="Self.DOCENTETE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENT">
+        <PropertyRef Name="ID_CLIENT" />
+      </Principal>
+      <Dependent Role="DOCENTETE">
+        <PropertyRef Name="ID_CLIENT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCLIGNE_DOCENTETE">
+    <End Role="DOCENTETE" Type="Self.DOCENTETE" Multiplicity="0..1" />
+    <End Role="DOCLIGNE" Type="Self.DOCLIGNE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DOCENTETE">
+        <PropertyRef Name="ID_PIECE" />
+      </Principal>
+      <Dependent Role="DOCLIGNE">
+        <PropertyRef Name="ID_PIECE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DOCLIGNE_PRODUIT">
+    <End Role="PRODUIT" Type="Self.PRODUIT" Multiplicity="0..1" />
+    <End Role="DOCLIGNE" Type="Self.DOCLIGNE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUIT">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Principal>
+      <Dependent Role="DOCLIGNE">
+        <PropertyRef Name="ID_PRODUIT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestcomEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CLIENT" EntityType="Self.CLIENT" />
+    <EntitySet Name="DOCENTETE" EntityType="Self.DOCENTETE" />
+    <EntitySet Name="DOCLIGNE" EntityType="Self.DOCLIGNE" />
+    <EntitySet Name="PRODUIT" EntityType="Self.PRODUIT" />
+    <AssociationSet Name="FK_DOCENTETE_CLIENT" Association="Self.FK_DOCENTETE_CLIENT">
+      <End Role="CLIENT" EntitySet="CLIENT" />
+      <End Role="DOCENTETE" EntitySet="DOCENTETE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCLIGNE_DOCENTETE" Association="Self.FK_DOCLIGNE_DOCENTETE">
+      <End Role="DOCENTETE" EntitySet="DOCENTETE" />
+      <End Role="DOCLIGNE" EntitySet="DOCLIGNE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DOCLIGNE_PRODUIT" Association="Self.FK_DOCLIGNE_PRODUIT">
+      <End Role="PRODUIT" EntitySet="PRODUIT" />
+      <End Role="DOCLIGNE" EntitySet="DOCLIGNE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

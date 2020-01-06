@@ -1,0 +1,65 @@
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtProduits" class="pull-left">Produit</label>
+  </div>
+  <div class="form-group col-md-8">
+
+      <select class="form-control" id="txtProduits" size="1" (change)="getInfosProduit()" [(ngModel)]="ligne.IdProduit" >
+          <option *ngFor="let produit of listProduits" [value]="produit.IdProduit">{{produit.Designation}}</option>
+      </select>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtPrix" class="pull-left">Prix</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="number" class="form-control" ID="txtPrix" (change)="calcul()" [(ngModel)]="ligne.Prix"/>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtQte" class="pull-left">Qte</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="number" class="form-control" ID="txtQte" (change)="calcul()" [(ngModel)]="ligne.Qte"/>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtMontantHT" class="pull-left">Montant HT</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="number" class="form-control" ID="txtMontantHT" [(ngModel)]="ligne.MontantHT"/>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtTVA" class="pull-left">TVA</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="number" class="form-control" ID="txtTVA" (change)="calcul()" [(ngModel)]="ligne.TVA"/>
+  </div>
+</div>
+
+<div cla="row">
+  <div class="form-group col-md-4">
+    <label for="txtMontantTTC" class="pull-left">MontantTTC</label>
+  </div>
+  <div class="form-group col-md-8">
+    <input type="number" class="form-control" ID="txtMontantTTC" [(ngModel)]="ligne.MontantTTC"/>
+  </div>
+</div>
+
+<div cla="row">
+    <div class="form-group col-md-4">
+     
+    </div>
+    <div class="form-group col-md-8">
+        <button (click)="setLigneFacture(ligne)" type="submit" class="btn btn-success mb-2 pull-left">Ajouter</button>
+    </div>
+  </div>

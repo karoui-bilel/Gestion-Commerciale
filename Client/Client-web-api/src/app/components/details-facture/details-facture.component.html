@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="form-group col-md-12">
+
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label for="txtNoPiece" class="pull-left"> N° Piece</label>
+      </div>
+      <div class="form-group col-md-3">
+        <input type="text" class="form-control" ID="txtNoPiece" [(ngModel)]="facture.NoPiece" required />
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for="txtClients" class="pull-left">Client</label>
+      </div>
+      <div class="form-group col-md-4">
+
+        <select class="form-control" id="txtClients" size="1" [(ngModel)]="facture.IdClient">
+          <option *ngFor="let client of listClients" [value]="client.IdClient">{{client.Client}}</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-2">
+        <label for="txtDateFacture" class="pull-left">Date facture</label>
+      </div>
+      <div class="form-group col-md-3">
+        <input type="date" class="form-control" ID="txtDateFacture" [ngModel]="facture.DateFacture|date:'yyyy-MM-dd'"
+          (ngModelChange)="facture.DateFacture = $event" required />
+      </div>
+      <div class="form-group col-md-6" align="right">
+        <i class="material-icons" (click)="TraitementLigneFacture({})" style="cursor:pointer"
+          title="Enregistrer Entete">save</i>
+    
+        <i *ngIf=isTrue; class="material-icons" (click)="TraitementLigneFacture({})" style="cursor:pointer"
+          title="Ajouter ligne">add_to_photos</i>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="form-group col-md-12">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="Designation">
+          <th mat-header-cell *matHeaderCellDef> Designation </th>
+          <td mat-cell *matCellDef="let element"> {{element.Designation}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="Prix">
+          <th mat-header-cell *matHeaderCellDef> Prix </th>
+          <td mat-cell *matCellDef="let element"> {{element.Prix| number : '1.2'}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="Qte">
+          <th mat-header-cell *matHeaderCellDef> Qté </th>
+          <td mat-cell *matCellDef="let element"> {{element.Qte| number : '1.2'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="MontantHT">
+          <th mat-header-cell *matHeaderCellDef> Montant HT </th>
+          <td mat-cell *matCellDef="let element"> {{element.MontantHT| number : '1.2'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="TVA">
+          <th mat-header-cell *matHeaderCellDef> TVA </th>
+          <td mat-cell *matCellDef="let element"> {{element.TVA| number : '1.2'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="MontantTTC">
+          <th mat-header-cell *matHeaderCellDef> Montant TTC </th>
+          <td mat-cell *matCellDef="let element"> {{element.MontantTTC| number : '1.2'}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef width ="10%">  </th>
+          <mat-cell *matCellDef="let row" >
+            <i (click)="TraitementLigneFacture(element)" class="material-icons" style="cursor:pointer" title="Wral">edit</i>
+            <i class="material-icons" (click)="remove(element)" style="cursor:pointer" title="Fakroun">delete</i>
+          </mat-cell>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

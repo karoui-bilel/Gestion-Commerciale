@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestcomModelStoreContainer" CdmEntityContainer="GestcomEntities">
+    <EntitySetMapping Name="CLIENT">
+      <EntityTypeMapping TypeName="GestcomModel.CLIENT">
+        <MappingFragment StoreEntitySet="CLIENT">
+          <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+          <ScalarProperty Name="NOM" ColumnName="NOM" />
+          <ScalarProperty Name="PRENOM" ColumnName="PRENOM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOCENTETE">
+      <EntityTypeMapping TypeName="GestcomModel.DOCENTETE">
+        <MappingFragment StoreEntitySet="DOCENTETE">
+          <ScalarProperty Name="DO_DATE" ColumnName="DO_DATE" />
+          <ScalarProperty Name="ID_PIECE" ColumnName="ID_PIECE" />
+          <ScalarProperty Name="DO_PIECE" ColumnName="DO_PIECE" />
+          <ScalarProperty Name="DO_TYPE" ColumnName="DO_TYPE" />
+          <ScalarProperty Name="ID_CLIENT" ColumnName="ID_CLIENT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DOCLIGNE">
+      <EntityTypeMapping TypeName="GestcomModel.DOCLIGNE">
+        <MappingFragment StoreEntitySet="DOCLIGNE">
+          <ScalarProperty Name="ID_LIGNE" ColumnName="ID_LIGNE" />
+          <ScalarProperty Name="ID_PIECE" ColumnName="ID_PIECE" />
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="PRIX" ColumnName="PRIX" />
+          <ScalarProperty Name="DESIGNATION" ColumnName="DESIGNATION" />
+          <ScalarProperty Name="TVA" ColumnName="TVA" />
+          <ScalarProperty Name="QTE" ColumnName="QTE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PRODUIT">
+      <EntityTypeMapping TypeName="GestcomModel.PRODUIT">
+        <MappingFragment StoreEntitySet="PRODUIT">
+          <ScalarProperty Name="ID_PRODUIT" ColumnName="ID_PRODUIT" />
+          <ScalarProperty Name="DESIGNATION" ColumnName="DESIGNATION" />
+          <ScalarProperty Name="PRIX" ColumnName="PRIX" />
+          <ScalarProperty Name="TVA" ColumnName="TVA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
