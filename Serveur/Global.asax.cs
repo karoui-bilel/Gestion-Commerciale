@@ -22,14 +22,15 @@ namespace ServeurWebApi
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            var container = new Container();
-            container.Register<IFactureRepository, FactureDAO>();
-            container.Register<IAuthentificationRepository , AuthentificationDAO>();
-            container.Verify();
+            //var container = new Container();
+            //container.Register<IFactureRepository, FactureDAO>();
+            //container.Register<IAuthentificationRepository , AuthentificationDAO>();
+            //container.Verify();
 
-            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
-            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(container);
-            //GlobalConfiguration.Configure(WebApiConfig.Register);
+            //DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+            //GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorDependencyResolver(container);
+            ////GlobalConfiguration.Configure(WebApiConfig.Register);
+            ///
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //AreaRegistration.RegisterAllAreas();
